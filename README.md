@@ -1,5 +1,13 @@
 # Resume AI Builder — React + FastAPI
 
+## Screenshots
+
+### Login
+![Resume AI Builder login screen](docs/images/login.png)
+
+### Main dashboard
+![Resume AI Builder main dashboard](docs/images/main.png)
+
 ## 1. Database (automatic)
 The backend now creates the database and the 3 tables itself on startup (backend/init_db.py).
 You only need PostgreSQL running and correct DB_* values in backend/.env.
