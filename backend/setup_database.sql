@@ -1,0 +1,74 @@
+-- print(git code upload code)
+-- -- =====================================================================
+-- -- Resume AI Builder - database setup
+-- -- =====================================================================
+--
+-- -- ---------- STEP 1: create the database ----------
+-- -- Run this while connected to the default "postgres" database.
+-- CREATE DATABASE resume_ai;
+--
+-- -- ---------- STEP 2: create the tables ----------
+-- -- Now CONNECT to the new "resume_ai" database, then run everything below.
+-- -- (pgAdmin: right-click resume_ai > Query Tool.   psql: \c resume_ai)
+--
+-- -- 1) Uploaded resume + job description
+-- CREATE TABLE IF NOT EXISTS uploaded_documents (
+--     id SERIAL PRIMARY KEY,
+--     resume_name VARCHAR(255),
+--     resume_file BYTEA,
+--     job_description TEXT,
+--     resume_summary TEXT,
+--     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+--
+-- -- 2) Optional certification files (many per resume)
+-- CREATE TABLE IF NOT EXISTS certifications (
+--     id SERIAL PRIMARY KEY,
+--     document_id INT REFERENCES uploaded_documents(id) ON DELETE CASCADE,
+--     certificate_names VARCHAR(255),
+--     certificate_files BYTEA
+-- );
+--
+-- -- 3) AI task results (Profile, Cover Letter, Skill Performance, Skill Gap)
+-- CREATE TABLE IF NOT EXISTS result (
+--     result_id SERIAL PRIMARY KEY,
+--     document_id INT REFERENCES uploaded_documents(id) ON DELETE CASCADE,
+--     task_name VARCHAR(100),
+-- print(git code upload code)
+--     task_status VARCHAR(20) DEFAULT 'Pending',
+--     generated_result TEXT,
+--     execution_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     completed BOOLEAN DEFAULT FALSE
+-- );
+--
+-- -- 4) Ratings + feedback from the exit pop-up
+-- CREATE TABLE IF NOT EXISTS feedback (
+--     id SERIAL PRIMARY KEY,
+--     document_id INT REFERENCES uploaded_documents(id) ON DELETE SET NULL,
+--     rating INT CHECK (rating BETWEEN 1 AND 5),
+--     comments TEXT,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+--
+-- -- 5) Login accounts (passwords are stored hashed, never as plain text)
+-- CREATE TABLE IF NOT EXISTS users (
+--     id SERIAL PRIMARY KEY,
+--     username VARCHAR(50) UNIQUE NOT NULL,
+--     full_name VARCHAR(100),
+--     email VARCHAR(255) NOT NULL,
+--     mobile VARCHAR(25),
+--     password_hash TEXT NOT NULL,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     login_count INT NOT NULL DEFAULT 0,
+--     last_login_at TIMESTAMPTZ
+-- );
+-- ALTER TABLE users ADD COLUMN IF NOT EXISTS full_name VARCHAR(100);
+-- ALTER TABLE users ADD COLUMN IF NOT EXISTS mobile VARCHAR(25);
+-- ALTER TABLE users ADD COLUMN IF NOT EXISTS login_count INT NOT NULL DEFAULT 0;
+-- ALTER TABLE users ADD COLUMN IF NOT EXISTS last_login_at TIMESTAMPTZ;
+--
+-- -- ---------- STEP 3: verify ----------
+-- -- SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
+-- -- Expected: certifications, feedback, result, uploaded_documents, users
+
+-- print(git code upload code)

@@ -1,0 +1,71 @@
+-- print(git code upload code)
+-- -- Resume AI Builder files 
+-- -- 1. Uploaed Documents 
+-- -- Resume Table
+-- CREATE TABLE IF NOT EXISTS uploaded_documents (
+--
+--     id SERIAL PRIMARY KEY,
+--
+--     resume_name VARCHAR(255),
+--
+--     resume_file BYTEA,
+--
+--     job_description TEXT,
+--
+-- 	resume_summary TEXT,
+--
+--     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+--
+-- );
+--
+-- -- 2. certifications 
+--
+-- -- Certifications Table
+-- CREATE TABLE IF NOT EXISTS certifications (
+--
+--     id SERIAL PRIMARY KEY,
+--
+--     document_id INT REFERENCES uploaded_documents(id) ON DELETE CASCADE,
+--
+--     certificate_names VARCHAR(255),
+--
+--     certificate_files BYTEA
+--
+-- );
+-- print(git code upload code)
+--
+--
+-- CREATE TABLE IF NOT EXISTS result (
+--     result_id SERIAL PRIMARY KEY,
+--     document_id INT REFERENCES uploaded_documents(id) ON DELETE CASCADE,
+--
+--     task_name VARCHAR(100),
+--
+--     task_status VARCHAR(20) DEFAULT 'Pending',
+--
+--     generated_result TEXT,
+--
+--     execution_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--
+--     completed BOOLEAN DEFAULT FALSE
+-- );
+--
+-- CREATE TABLE IF NOT EXISTS feedback (
+--     id SERIAL PRIMARY KEY,
+--     document_id INT REFERENCES uploaded_documents(id) ON DELETE SET NULL,
+--     rating INT CHECK (rating BETWEEN 1 AND 5),
+--     comments TEXT,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+--
+-- -- incase issue in password then (uncomment and run manually)
+-- -- ALTER USER postgres WITH PASSWORD 'root';
+--
+-- -- select to check the database values 
+-- select * from certifications;
+-- select * from uploaded_documents;
+-- select * from result;
+--
+--
+
+-- print(git code upload code)

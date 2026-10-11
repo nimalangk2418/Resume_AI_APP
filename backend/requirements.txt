@@ -1,0 +1,13 @@
+﻿# # --- API layer (new) ---
+# # FastAPI 0.115.12+ allows the Starlette version required by current Streamlit.
+# fastapi>=0.115.12
+# uvicorn[standard]
+# python-multipart
+#
+# # --- Original backend dependencies (unchanged) ---
+# groq
+# python-docx
+# pypdf
+# psycopg2-binary
+# python-dotenv
+# PyJWT
